@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire</title>
+    <style>/* Reset CSS */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+form {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+input[type="submit"]{
+    display: block;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button {
+    display: block;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+</style>
+</head>
+<body>
+    {% include 'partiels/user_nav.html' %}
+
+    <form id="userLocationForm" action="/user.filter.business" method="post">
+        <label for="radius">Sélectionnez un rayon :</label><br>
+        <input type="radio" id="radius_5" name="radius" value="5">
+        <label for="radius_5">5 km</label><br>
+        <input type="radio" id="radius_10" name="radius" value="10">
+        <label for="radius_10">10 km</label><br>
+        <input type="radio" id="radius_20" name="radius" value="20">
+        <label for="radius_20">20 km</label><br>
+        <input type="radio" id="radius_50" name="radius" value="50">
+        <label for="radius_50">50 km</label><br>
+        <input type="radio" id="radius_100" name="radius" value="100">
+        <label for="radius_100">100 km</label><br><br>
+
+        <label for="categories">Sélectionnez les catégories :</label><br>
+        <input type="checkbox" id="category_hotel" name="categories" value="hotel">
+        <label for="category_hotel">Hôtel</label><br>
+        <input type="checkbox" id="category_bar" name="categories" value="bar">
+        <label for="category_bar">Bar</label><br>
+        <input type="checkbox" id="category_sale" name="categories" value="trade">
+        <label for="category_sale">Commerce</label><br>
+        <input type="checkbox" id="category_cafe" name="categories" value="cafe">
+        <label for="category_cafe">Cyber Café</label><br>
+        <input type="checkbox" id="category_informatics" name="categories" value="informatics">
+        <label for="category_informatics">Compagnie Informatique</label><br>
+        <input type="checkbox" id="category_carpenter" name="categories" value="carpenter">
+        <label for="category_carpenter">Menuserie</label><br>
+        <input type="checkbox" id="category_restaurant" name="categories" value="restaurant">
+        <label for="category_restaurant">Restaurant</label><br><br>
+
+        <!-- Champs de latitude et longitude -->
+        <label for="userLat">Latitude:</label><br>
+        <input type="text" id="userLat" name="userLat" required readonly><br>
+        <label for="userLng">Longitude:</label><br>
+        <input type="text" id="userLng" name="userLng" required readonly><br>
+
+        <!-- Bouton pour obtenir la position de l'utilisateur -->
+        <button type="button" onclick="getUserLocation()">Obtenir ma position</button><br><br>
+
+        <input type="submit" value="Envoyer">
+    </form>
+
+    <script>
+        function getUserLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    document.getElementById("userLat").value = position.coords.latitude;
+                    document.getElementById("userLng").value = position.coords.longitude;
+                });
+            } else {
+                alert("La géolocalisation n'est pas supportée par ce navigateur.");
+            }
+        }
+    </script>
+</body>
+</html>

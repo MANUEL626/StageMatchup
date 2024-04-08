@@ -1,0 +1,122 @@
+/* style.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.company-nav {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+.company-nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.company-nav ul li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.company-nav ul li:last-child {
+    margin-right: 0;
+}
+
+.company-nav ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.company-nav ul li a:hover {
+    text-decoration: underline;
+    color: #ccc;
+}
+
+h4 {
+    color: #333;
+}
+
+.post {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.post a {
+    text-decoration: none;
+    color: #333;
+}
+
+.post a:hover {
+    text-decoration: underline;
+    color: #555;
+}
+
+/* Ajoutez ces styles à votre fichier CSS */
+
+.edit-link, .delete-link {
+    display: inline-block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.edit-link:hover, .delete-link:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Si vous voulez espacer un peu les liens */
+.post-links {
+    margin-top: 10px;
+}
+
+/**/
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+.div-index {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.div-section {
+    margin: 0 20px;
+    text-align: center;
+}
+
+.div-section a {
+    text-decoration: none;
+}
+
+.section {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    display: inline-block;
+}
+
+.section:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.section p {
+    margin: 0;
+    color: #333;
+}

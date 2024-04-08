@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/style.css')}}">
+</head>
+<body>
+
+    {% include 'partiels/company_nav.html' %}
+
+    {% for post in posts %}
+        <div class="post">
+            <h4>{{ post.name }}</h4>
+            <p>{{ post.description }}</p>
+            <div class="post-links">
+                <a href="/company.post/info.post/{{ post.id }}" class="edit-link">edit</a>
+                <a href="/company.post/delete.post/{{ post.id }}" class="delete-link">delete</a>
+            </div>
+        </div>
+    {% endfor %}
+</body>
+</html>

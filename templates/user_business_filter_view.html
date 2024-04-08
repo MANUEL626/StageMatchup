@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+/* Reset CSS */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+div {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+h4 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+div a {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+div a:hover {
+    background-color: #0056b3;
+}
+
+</style>
+</head>
+<body>
+    {% include 'partiels/user_nav.html' %}
+    
+    {% for company in companies %}
+        <div>
+            <h4>{{ company.name }}</h4>
+            <a href="/user.company_info/{{ company.name }}">More information</a>
+        </div>
+    {% endfor %}
+
+</body>
+</html>

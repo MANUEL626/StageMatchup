@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/form.css')}}">
+</head>
+<body>
+
+    {% include 'partiels/company_nav.html' %}
+
+    <div class="post">
+        <h4>{{ post.name }}</h4>
+        <p>{{ post.description }}</p>
+        <a href="/company.post/delete.post/{{ post.id }}">Supprimer</a>
+    </div>
+
+    <form action="/company.post/info.post/{{ post.id }}" method="post">
+        <label for="new_name">Nouveau nom</label>
+        <input type="text" id="new_name" name="name">
+        <input type="submit" value="Valider">
+    </form>
+
+    <form action="/company.post/info.post/{{ post.id }}" method="post">
+        <label for="new_description">Nouvelle description</label>
+        <textarea id="new_description" name="description"></textarea>
+        <input type="submit" value="Valider">
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/form.css')}}">
+</head>
+<body>
+    <h1>LOGIN</h1>
+        <a href="/">Home</a>
+    <form action="/company.login" method="post">
+        <label >E-mail :</label><br>
+        <input type="email"  name="company_mail" required><br><br>
+
+        <label for="password">Password :</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <input type="submit" value="Login">
+    </form>
+    <a href="/company.register">Don't have account?</a>
+</body>
+</html>
