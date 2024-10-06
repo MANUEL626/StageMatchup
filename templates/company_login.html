@@ -3,20 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="{{url_for('static', filename = 'css/form.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/style.css')}}">
+    <script src="{{ url_for('static', filename='js/flash.js') }}" defer></script>
 </head>
 <body>
-    <h1>LOGIN</h1>
-        <a href="/">Home</a>
+
+{% include 'partiels/_alert_message.html' %}
+
+<div class="connection">
+    <div class="title">LOGIN</div>
     <form action="/company.login" method="post">
-        <label >E-mail :</label><br>
-        <input type="email"  name="company_mail" required><br><br>
+        <div class="input-group">
+            <input type="email"  name="company_mail" required>
+            <label >E-mail :</label>
+        </div>
 
-        <label for="password">Password :</label><br>
-        <input type="password" id="password" name="password" required><br><br>
+        <div class="input-group">
+            <input type="password" id="password" name="password" required>
+            <label for="password">Password :</label>
+        </div>
 
-        <input type="submit" value="Login">
+        <input class="submit-btn" type="submit" value="Login">
     </form>
-    <a href="/company.register">Don't have account?</a>
+
+    <div class="login-link">
+        <p>Haven't account?<a href="/company.register">Register</a></p>
+    </div>
+
+    <div class="login-link">
+        <p>Go to <a href="/">Home</a></p>
+    </div>
+
+</div>
+
+
+<link rel="stylesheet" href="{{url_for('static', filename = 'js/flash.js')}}">
+<link rel="stylesheet" href="{{url_for('static', filename = 'js/reload_page.js')}}">
 </body>
 </html>

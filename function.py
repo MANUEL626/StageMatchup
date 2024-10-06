@@ -1,5 +1,7 @@
+import requests
 from flask import flash
 import html
+import toml
 
 
 def escape_html_and_check(text):
@@ -45,3 +47,41 @@ def verify_mail(existing_mail):
         flash(category='error', message='this email is already taken')
         return False
     return True
+
+
+def check_locality(locality):
+    url = f"https://nominatim.openstreetmap.org/search?q={locality}&format=json"
+    response = requests.get(url)
+    data = response.json()
+    if data and len(data) > 0:
+        return True
+    else:
+        flash(category='error', message='locality not found')
+        print('error')
+        return False
+
+
+def get_locations(query):
+    url = "https://nominatim.openstreetmap.org/search"
+    params = {
+        'format': 'json',
+        'q': query
+    }
+    try:
+        response = requests.get(url, params=params)
+        data = response.json()
+        locations = [loc['display_name'] for loc in data]
+        return locations
+    except requests.exceptions.JSONDecodeError:
+        return []
+
+
+def load_config(file_path):
+    with open(file_path, "r") as f:
+        config = toml.load(f)
+    return config
+
+
+def get_secret_key():
+    config = load_config("secrets.toml")
+    return config["app"]["secret_key"]

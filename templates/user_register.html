@@ -6,32 +6,48 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>register user</title>
-    <link rel="stylesheet" href="{{url_for('static', filename = 'css/form1.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/style.css')}}">
+    <script src="{{ url_for('static', filename='js/flash.js') }}" defer></script>
 </head>
 <body>
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    {% for category, message in messages %}
-      <div class="alert alert-{{ category }}">
-        {{ message }}
-      </div>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
-    <h1>REGISTER</h1>
-    <a href="/">Home</a>
-<form action="/user.register" method="post">
-    <label>Username</label>
-    <input type="text" name="username">
-    <label>E-mail</label>
-    <input type="email" name="user_mail">
-    <label>Password</label>
-    <input type="password" name="password">
-    <label>Confirm Password</label>
-    <input type="password" name="confirm_password">
-    <a href="/user.login">Have account?</a>
-    <input type="submit" value="Submit">
-</form>
+
+{% include 'partiels/_alert_message.html' %}
+
+<div class="connection">
+    <div class="title">REGISTER</div>
+    <form action="/user.register" method="post">
+        <div class="input-group">
+            <input type="text" name="username">
+            <label>Username</label>
+        </div>
+
+        <div class="input-group">
+            <input type="email" name="user_mail">
+            <label>E-mail</label>
+        </div>
+
+        <div class="input-group">
+            <input type="password" name="password">
+            <label>Password</label>
+        </div>
+
+        <div class="input-group">
+            <input type="password" name="confirm_password">
+            <label>Confirm Password</label>
+        </div>
+
+        <input class="submit-btn" type="submit" value="Register">
+    </form>
+
+    <div class="login-link">
+        <p>Have an account? <a href="/user.login">Login</a></p>
+    </div>
+
+    <div class="login-link">
+        <p>Go to <a href="/">Home</a></p>
+    </div>
+</div>
+<link rel="stylesheet" href="{{url_for('static', filename = 'js/flash.js')}}">
 
 </body>
 </html>

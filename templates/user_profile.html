@@ -4,39 +4,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
-    <link rel="stylesheet" href="{{url_for('static', filename = 'css/form1.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/style.css')}}">
 </head>
 <body>
     {% include 'partiels/user_nav.html' %}
-    <h1>User Profile</h1>
-    <a href="/user.logout">Log out</a>
-    <a href="/user.delete">Delete account</a>
+    {% include 'partiels/_alert_message.html' %}
 
-    <!-- Formulaire de modification du nom d'utilisateur -->
-    <form action="/user.profile" method="post">
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" value="{{ user.username }}"><br>
-        <input type="submit" value="Save Username">
-    </form>
-    <hr>
+    <main>
+        <div class="user-info">
+            <br><br>
+            <h1>{{ user.username }}</h1>
+            <br><br>
+        </div>
 
-    <!-- Formulaire de modification de l'email -->
-    <form action="/user.profile" method="post">
-        <label for="user_mail">Email:</label><br>
-        <input type="email" id="user_mail" name="user_mail" value="{{ user.email }}"><br>
-        <input type="submit" value="Save Email">
-    </form>
-    <hr>
+                <hr>
 
-    <!-- Formulaire de modification du mot de passe -->
-    <form action="/user.profile" method="post">
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password"><br>
+        <div class="log">
+            <div class="align">
+                <button class="log_btn" type="button" onclick="openLogoutPopup()">Logout</button>
+                <button class="log_btn" type="button" onclick="openDeletePopup()">Delete account</button>
+            </div>
+            <br><br><br>
 
-        <label for="confirm_password">Confirm Password:</label><br>
-        <input type="password" id="confirm_password" name="confirm_password"><br>
+            <div id="LogoutPopup" class="popup">
+                <p>Logout?</p>
+                <form action="{{ url_for('user_logout') }}" method="post" style="display:inline;">
+                    <button class="log_btn" type="submit">Logout</button>
+                    <button class="log_btn" type="button" onclick="closeLogoutPopup()">Cancel</button>
+                </form>
+            </div>
+            <div id="DeletePopup" class="popup">
+                <p>Delete account?</p>
+                <form action="{{ url_for('user_delete') }}" method="post" style="display:inline;">
+                    <button class="log_btn" type="submit">Delete account</button>
+                    <button class="log_btn" type="button" onclick="closeDeletePopup()">Cancel</button>
+                </form>
+            </div>
 
-        <input type="submit" value="Save Password">
-    </form>
+            <div id="popup-overlay" class="popup-overlay"></div>
+            <script>
+                function openLogoutPopup() {
+                    document.getElementById('LogoutPopup').classList.add('show');
+                    document.getElementById('popup-overlay').classList.add('show');
+                }
+
+                function closeLogoutPopup() {
+                    document.getElementById('LogoutPopup').classList.remove('show');
+                    document.getElementById('popup-overlay').classList.remove('show');
+                }
+
+                function openDeletePopup() {
+                    document.getElementById('DeletePopup').classList.add('show');
+                    document.getElementById('popup-overlay').classList.add('show');
+                }
+
+                function closeDeletePopup() {
+                    document.getElementById('DeletePopup').classList.remove('show');
+                    document.getElementById('popup-overlay').classList.remove('show');
+                }
+            </script>
+        </div>
+
+        <hr>
+        <br><br>
+
+        <div class="connection">
+            <div class="title">Update Username</div>
+            <form action="/user.profile" method="post">
+                <div class="input-group">
+                    <input type="text" id="username" name="username" value="{{ user.username }}">
+                    <label for="username">Username:</label>
+                </div>
+                <input class="submit-btn" type="submit" value="Update">
+            </form>
+        </div>
+
+        <div class="connection">
+            <div class="title">Update Mail</div>
+            <form action="/user.profile" method="post">
+                <div class="input-group">
+                    <input type="email" id="user_mail" name="user_mail" value="{{ user.email }}">
+                    <label for="user_mail">Email:</label>
+                </div>
+                <input class="submit-btn" type="submit" value="Update">
+            </form>
+        </div>
+
+        <div class="connection">
+            <div class="title">Update Password</div>
+            <form action="/user.profile" method="post">
+                <div class="input-group">
+                    <input type="password" id="password" name="password">
+                    <label for="password">Password:</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="password" id="confirm_password" name="confirm_password">
+                    <label for="confirm_password">Confirm Password:</label>
+                </div>
+
+                <input class="submit-btn" type="submit" value="Update">
+            </form>
+        </div>
+
+
+    </main>
+
 </body>
 </html>

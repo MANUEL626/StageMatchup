@@ -3,102 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Information</title>
-    <style>/* Reset CSS */
-/* Reset CSS */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
-}
-
-h1, h2 {
-    margin-top: 20px;
-}
-
-h1 {
-    font-size: 28px;
-    text-align: center;
-}
-
-h2 {
-    font-size: 24px;
-    color: #666;
-}
-
-p {
-    margin-top: 10px;
-    font-size: 16px;
-    color: #333;
-    line-height: 1.5;
-}
-
-hr {
-    margin: 40px 0;
-    border: 0;
-    border-top: 1px solid #ccc;
-}
-
-.info-container {
-    width: 80%;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f5f5f5;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.info-container h2 {
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.info-container a {
-    display: inline-block;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    outline: none; /* Enlève le surlignement */
-}
-
-.info-container a:hover {
-    background-color: #0056b3;
-}
-
-
-.map-container {
-    width: 80%;
-    margin: 20px auto;
-
-    border-radius: 5px;
-}
-
-#map {
-    height: 400px;
-    width: 100%;
-}
-
-      .map-container {
-        pointer-events: none; /* Désactive les événements de pointage sur la carte */
-    }
-
-</style>
 </head>
 <body>
     {% include 'partiels/user_nav.html' %}
-    <h1>{{ business.company.name }}</h1>
-    <div class="info-container">
-        <h2>{{ business.name }}</h2>
-        <p>{{ business.description }}</p>
-        <a href="/user.company_info/{{ business.company.name }}">view company</a>
-    </div>
+    <main>
+        <div class="content">
+            <div class="text-content">
+                <h1>{{ business.company.name }}</h1>
+                <h3>{{ business.name }}</h3>
+                <p>{{ business.description }}</p><br>
+                <a href="/user.company_info/{{ business.company.name }}"><button>view company</button></a>
+            </div>
+        </div>
+    </main>
 
-    <hr>
-    <h1>Carte</h1>
-    <div id="map" class="map-container"></div>
-
-    {% include "partiels/map.html" %}
 </body>
 </html>

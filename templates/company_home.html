@@ -2,22 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/form.css')}}">
     <title>Title</title>
-    <link rel="stylesheet" href="{{url_for('static', filename = 'css/style.css')}}">
 </head>
 <body>
 
     {% include 'partiels/company_nav.html' %}
-
-    {% for post in posts %}
-        <div class="post">
-            <h4>{{ post.name }}</h4>
-            <p>{{ post.description }}</p>
-            <div class="post-links">
-                <a href="/company.post/info.post/{{ post.id }}" class="edit-link">edit</a>
-                <a href="/company.post/delete.post/{{ post.id }}" class="delete-link">delete</a>
+    <main>
+        {% for post in posts %}
+            <div class="content">
+                <div class="text-content">
+                    <h1>{{ post.name }}</h1>
+                    <p>{{ post.description }}</p><br><br>
+                    <div class="align">
+                        <a href="/company.post/info.post/{{ post.id }}" class="edit-link"><button>edit</button></a>
+                        <a href="#" onclick="confirmDelete('/company.post/delete.post/{{ post.id }}'); return false;" class="delete-link"><button>delete</button></a>
+                    </div>
+                </div>
             </div>
-        </div>
-    {% endfor %}
+            <hr>
+        {% endfor %}
+    </main>
+<script>
+    function confirmDelete(url) {
+        if (confirm("Êtes-vous sûr de vouloir supprimer ce post ?")) {
+            window.location.href = url;
+        }
+    }
+</script>
+
 </body>
 </html>

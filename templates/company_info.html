@@ -3,56 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <style>/* Reset CSS */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
-}
-
-h2 {
-    text-align: center;
-    margin-top: 20px;
-}
-
-div {
-    width: 80%;
-    margin: 20px auto;
-}
-
-div > div {
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-
-h3 {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-p {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 10px;
-}
-</style>
 </head>
 <body>
     {% include 'partiels/user_nav.html' %}
-    <h2>{{ company.name }}</h2>
-    <div>
+    <main>
+        <h1 class="h1" >{{ company.name }}</h1><br><br>
         {% for business in company.businesses %}
-            <div>
-                <h3>{{ business.name }}</h3>
-                <p>{{ business.description }}</p>
+            <div class="content">
+                <div class="text-content">
+                    <h1>{{ business.name }}</h1>
+                    <p>{{ business.description }}</p><br><br>
+                </div>
             </div>
+            <hr>
         {% endfor %}
-    </div>
+    </main>
 
 </body>
 </html>

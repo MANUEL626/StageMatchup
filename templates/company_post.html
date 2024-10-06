@@ -3,25 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="{{url_for('static', filename = 'css/form.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/style.css')}}">
+    <script src="{{ url_for('static', filename='js/flash.js') }}" defer></script>
+
 </head>
 <body>
+{% include 'partiels/company_nav.html' %}
 
-    {% include 'partiels/company_nav.html' %}
+{% include 'partiels/_alert_message.html' %}
 
-<form action="/company.post" method="post">
-    <label>Name</label><br>
-    <input type="text" name="name"><br>
-    <label>Description</label><br>
-    <textarea name="description"></textarea><br>
-    <input type="submit" value="submit">
-</form>
+<main>
+    <div class="connection">
+        <div class="title">ADD ITEM</div>
+        <form action="/company.post" method="post">
 
-    <script>
-        if ( window.history.replaceState ) {
-            window.history.replaceState( null, null, window.location.href );
-        }
-    </script>
+            <div class="input-group">
+                <select name="business_type" required>
+                    <option value="">-- Sélectionnez un type de business --</option>
+                    <option value="restaurant">Restaurant</option>
+                    <option value="cafe">Cyber Café</option>
+                    <option value="hotel">Hôtel</option>
+                    <option value="bar">Bar</option>
+                    <option value="trade">Commerce</option>
+                    <option value="informatics">Compagnie Informatique</option>
+                    <option value="carpenter">Menuserie</option>
+                </select>
+                <label>Business Type</label>
+            </div>
+
+            <div class="input-group">
+                <textarea name="description"></textarea>
+                <label>Description</label>
+            </div>
+            <input class="submit-btn" type="submit" value="Add post">
+        </form>
+    </div>
+</main>
+
+
+
+<link rel="stylesheet" href="{{url_for('static', filename = 'js/reload_page.js')}}">
 
 </body>
 </html>

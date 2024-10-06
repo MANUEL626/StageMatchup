@@ -4,28 +4,68 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="{{url_for('static', filename = 'css/form.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form1.css') }}">
+    <script src="{{ url_for('static', filename='js/flash.js') }}" defer></script>
+
 </head>
 <body>
 
-    {% include 'partiels/company_nav.html' %}
+{% include 'partiels/company_nav.html' %}
 
-    <div class="post">
-        <h4>{{ post.name }}</h4>
-        <p>{{ post.description }}</p>
-        <a href="/company.post/delete.post/{{ post.id }}">Supprimer</a>
+{% include 'partiels/_alert_message.html' %}
+
+<main>
+    <div class="content">
+        <div class="text-content">
+            <h1>{{ post.name }}</h1>
+            <p>{{ post.description }}</p><br><br>
+            <div class="align">
+                <a href="#" onclick="confirmDelete('/company.post/delete.post/{{ post.id }}'); return false;" class="delete-link"><button>delete</button></a>
+            </div>
+        </div>
+    </div>
+    <br><br>
+
+    <div class="connection">
+        <div class="title">Update type</div>
+        <form action="/company.post/info.post/{{ post.id }}" method="post">
+            <div class="input-group">
+                <select id="new_name" name="name" required>
+                    <option value="">-- Select business type --</option>
+                    <option value="restaurant">Restaurant</option>
+                    <option value="cafe">Cyber Café</option>
+                    <option value="hotel">Hôtel</option>
+                    <option value="bar">Bar</option>
+                    <option value="trade">Commerce</option>
+                    <option value="informatics">Compagnie Informatique</option>
+                    <option value="carpenter">Menuserie</option>
+                </select>
+                <label for="new_name">New type</label>
+            </div>
+            <input class="submit-btn" type="submit" value="Update">
+        </form>
     </div>
 
-    <form action="/company.post/info.post/{{ post.id }}" method="post">
-        <label for="new_name">Nouveau nom</label>
-        <input type="text" id="new_name" name="name">
-        <input type="submit" value="Valider">
-    </form>
+    <div class="connection">
+        <div class="title">Update</div>
+        <form action="/company.post/info.post/{{ post.id }}" method="post">
+            <div class="input-group">
+                <textarea id="new_description" name="description"></textarea>
+                <label for="new_description">New description</label>
+            </div>
+            <input class="submit-btn" type="submit" value="Update">
+        </form>
+    </div>
+</main>
 
-    <form action="/company.post/info.post/{{ post.id }}" method="post">
-        <label for="new_description">Nouvelle description</label>
-        <textarea id="new_description" name="description"></textarea>
-        <input type="submit" value="Valider">
-    </form>
+
+<script>
+    function confirmDelete(url) {
+        if (confirm("Êtes-vous sûr de vouloir supprimer ce post ?")) {
+            window.location.href = url;
+        }
+    }
+</script>
 
 </body>
 </html>

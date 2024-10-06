@@ -2,57 +2,56 @@
 <html>
 <head>
     <title>Enregistrer un lieu</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <style>
-        #map {
-            height: 400px;
-            width: 100%;
-        }
-    </style>
-    <link rel="stylesheet" href="{{url_for('static', filename = 'css/form.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/style.css')}}">
+    <script src="{{ url_for('static', filename='js/flash.js') }}" defer></script>
+
 </head>
 <body>
-    <h1>REGISTER</h1>
-        <a href="/">Home</a>
-    <form method="POST" action="/company.register">
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" required><br>
-        <label>E-mail</label><br>
-        <input type="email" name="company_mail"><br>
-        <label>Business Type</label><br>
-        <select name="business_type" required>  <!-- Ajout de l'attribut required pour rendre le champ obligatoire -->
-            <option value="">-- Sélectionnez un type de business --</option>
-            <option value="restaurant">Restaurant</option>
-            <option value="cafe">Cyber Café</option>
-            <option value="hotel">Hôtel</option>
-            <option value="bar">Bar</option>
-            <option value="trade">Commerce</option>
-            <option value="informatics">Compagnie Informatique</option>
-            <option value="carpenter">Menuserie</option>
-        </select><br>
-        <label for="lat">Latitude:</label><br>
-        <input type="text" id="lat" name="lat" required readonly><br>
-        <label for="lng">Longitude:</label><br>
-        <input type="text" id="lng" name="lng" required readonly><br>
-        <label>Password</label><br>
-        <input type="password" name="password"><br>
-        <label>Confirm Password</label><br>
-        <input type="password" name="confirm_password"><br>
-        <input type="submit" value="submit"><br><br>
-    </form>
-    <a href="/company.login">Have account?</a>
-    <hr>
-    <h1>Carte</h1>
-    <div id='map'></div>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script>
-        var map = L.map('map').setView([0, 0], 2);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-        map.on('click', function (e) {
-            document.getElementById('lat').value = e.latlng.lat;
-            document.getElementById('lng').value = e.latlng.lng;
-        });
-    </script>
+{% include 'partiels/_alert_message.html' %}
+
+<div class="connection">
+    <div class="title">REGISTER</div>
+
+    <form method="POST" action="/company.register">
+        <div class="input-group">
+            <input type="text" id="name" name="name" required>
+            <label for="name">Name:</label>
+        </div>
+
+        <div class="input-group">
+            <input type="email" name="company_mail">
+            <label>E-mail</label>
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="locality" name="locality" list="suggestions" required >
+             <label for="locality">Localité:</label>
+            <datalist id="suggestions"></datalist>
+        </div>
+
+        <div class="input-group">
+            <input type="password" name="password">
+            <label>Password</label>
+        </div>
+
+        <div class="input-group">
+            <input type="password" name="confirm_password">
+            <label>Confirm Password</label>
+        </div>
+        <input class="submit-btn" type="submit" value="Register">
+    </form>
+
+    <div class="login-link">
+        <p>Have an account? <a href="/company.login">Login</a></p>
+    </div>
+
+    <div class="login-link">
+        <p>Go to <a href="/">Home</a></p>
+    </div>
+
+</div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

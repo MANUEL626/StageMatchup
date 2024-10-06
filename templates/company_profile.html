@@ -3,163 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <style>
-        #map {
-            height: 400px;
-            width: 100%;
-        }
-
-        /* Ajoutez ces styles à votre feuille de style CSS */
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-#map {
-    height: 400px;
-    width: 100%;
-    margin-top: 20px;
-}
-
-h3 {
-    font-size: 24px;
-    color: #333;
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-li {
-    margin-bottom: 10px;
-    font-size: 16px;
-    color: #666;
-}
-
-a {
-    display: block;
-    margin-bottom: 10px;
-    color: #007bff;
-    text-decoration: none;
-}
-
-a:hover {
-    color: #0056b3;
-}
-
-form {
-    margin-top: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #333;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"],
-select,
-textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    font-size: 16px;
-}
-
-input[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-    </style>
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/style.css')}}">
+    <script src="{{ url_for('static', filename='js/flash.js') }}" defer></script>
 </head>
 <body>
 
     {% include 'partiels/company_nav.html' %}
 
-    <h3>{{ company.name }}</h3>
-    <ul>
-        <li>{{ company.email}}</li>
-        <li>{{ company.business_type }}</li>
-        <li>latitude = {{ company.lat }} et longitude = {{ company.lng }}</li>
+    <main>
+        {% include 'partiels/_alert_message.html' %}
+        <div class="user-info">
+            <br><br>
+            <h1>{{ company.name }}</h1>
+            <br><br>
+        </div>
 
-    </ul>
-    <a href="/company.logout">Log out</a><br>
-    <a href="/company.delete">Delete account</a><br><br>
+        <hr>
 
+        <div class="log">
+            <div class="align">
+                <button class="log_btn" type="button" onclick="openLogoutPopup()">Logout</button>
+                <button class="log_btn" type="button" onclick="openDeletePopup()">Delete account</button>
+            </div>
+            <br><br><br>
 
-    <form action="/company.profile" method="post">
-        <label>Name</label><br>
-        <input type="text" name="name"><br>
-        <input type="submit" value="submit">
-    </form>
+            <div id="LogoutPopup" class="popup">
+                <p>Logout?</p>
+                <form action="{{ url_for('company_logout') }}" method="post" style="display:inline;">
+                    <button class="log_btn" type="submit">Logout</button>
+                    <button class="log_btn" type="button" onclick="closeLogoutPopup()">Cancel</button>
+                </form>
+            </div>
+            <div id="DeletePopup" class="popup">
+                <p>Delete account?</p>
+                <form action="{{ url_for('company_delete') }}" method="post" style="display:inline;">
+                    <button class="log_btn" type="submit">Delete account</button>
+                    <button class="log_btn" type="button" onclick="closeDeletePopup()">Cancel</button>
+                </form>
+            </div>
 
-    <form action="/company.profile" method="post">
-        <label>E-mail</label><br>
-        <input type="email" name="company_mail"><br>
-        <input type="submit" value="submit">
-    </form>
+            <div id="popup-overlay" class="popup-overlay"></div>
+            <script>
+                function openLogoutPopup() {
+                    document.getElementById('LogoutPopup').classList.add('show');
+                    document.getElementById('popup-overlay').classList.add('show');
+                }
 
-    <form action="/company.profile" method="post">
-        <label>Business Type</label><br>
-        <select name="business_type" required>  <!-- Ajout de l'attribut required pour rendre le champ obligatoire -->
-            <option value="">-- Sélectionnez un type de business --</option>
-            <option value="restaurant">Restaurant</option>
-            <option value="cafe">Café</option>
-            <option value="hotel">Hôtel</option>
-            <option value="bar">Bar</option>
-        </select><br>
-        <input type="submit" value="submit">
-    </form>
+                function closeLogoutPopup() {
+                    document.getElementById('LogoutPopup').classList.remove('show');
+                    document.getElementById('popup-overlay').classList.remove('show');
+                }
 
-    <form action="/company.profile" method="post">
-        <label>Password</label><br>
-        <input type="password" name="password"><br>
-        <label>Confirm Password</label><br>
-        <input type="password" name="confirm_password"><br>
-        <input type="submit" value="submit"><br><br>
-    </form>
+                function openDeletePopup() {
+                    document.getElementById('DeletePopup').classList.add('show');
+                    document.getElementById('popup-overlay').classList.add('show');
+                }
 
-    <form action="/company.profile" method="post">
-        <label for="lat">Latitude:</label><br>
-        <input type="text" id="lat" name="lat" required readonly><br>
-        <label for="lng">Longitude:</label><br>
-        <input type="text" id="lng" name="lng" required readonly><br>
-        <input type="submit" value="submit">
-    </form>
+                function closeDeletePopup() {
+                    document.getElementById('DeletePopup').classList.remove('show');
+                    document.getElementById('popup-overlay').classList.remove('show');
+                }
+            </script>
+        </div>
 
-    <br>
-    <hr>
-    <br>
-    <h1>Carte</h1>
-    <div id='map'></div>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script>
-        var map = L.map('map').setView([0, 0], 2);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        <hr>
+        <br><br>
 
-        map.on('click', function (e) {
-            document.getElementById('lat').value = e.latlng.lat;
-            document.getElementById('lng').value = e.latlng.lng;
-        });
-    </script>
+        <div class="connection">
+            <div class="title">Update Company's name</div>
+            <form action="/company.profile" method="post">
+                <div class="input-group">
+                    <input type="text" name="name" value="{{ company.name }}">
+                    <label>Name</label>
+                </div>
+                <input class="submit-btn" type="submit" value="Update">
+            </form>
+        </div>
+
+        <div class="connection">
+            <div class="title">Update Email</div>
+            <form action="/company.profile" method="post">
+                <div class="input-group">
+                    <input type="email" name="company_mail" value="{{ company.email }}">
+                    <label>E-mail</label>
+                </div>
+                <input class="submit-btn" type="submit" value="Update">
+            </form>
+        </div>
+
+        <div class="connection">
+            <div class="title">Update Password</div>
+            <form action="/company.profile" method="post">
+                <div class="input-group">
+                    <input type="password" name="password">
+                    <label>Password</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="password" name="confirm_password">
+                    <label>Confirm Password</label>
+                </div>
+                <input class="submit-btn" type="submit" value="Update">
+            </form>
+        </div>
+
+        <div class="connection">
+            <div class="title">Update Locality</div>
+            <form action="/company.profile" method="post">
+                <div class="input-group">
+                    <input type="text" id="locality" name="locality" list="suggestions" value="{{ company.locality }}" required>
+                    <label for="locality">Locality:</label>
+                    <datalist id="suggestions"></datalist>
+                </div>
+                <input class="submit-btn" type="submit" value="Update">
+            </form>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
 
 </body>
 </html>

@@ -3,69 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <style>
-/* Reset CSS */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-}
-
-.container {
-    width: 80%;
-    margin: 20px auto;
-}
-
-.business {
-    background-color: #fff;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h3 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-h4 {
-    font-size: 18px;
-    color: #666;
-    margin-bottom: 5px;
-}
-
-p {
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.container a {
-    display: inline-block;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-}
-
-.container a:hover {
-    background-color: #0056b3;
-}
-    </style>
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/style.css')}}">
 </head>
 <body>
     {% include 'partiels/user_nav.html' %}
+    {% include 'partiels/_alert_message.html' %}
 
-    <div class="container">
+    <main>
         {% for business in businesses %}
-            <div class="business">
-                <h3>{{ business.name }}</h3>
-                <h4>Company: {{ business.company.name }}</h4>
-                <p>{{ business.description }}</p>
-                <a href="/user.info/{{ business.company.name }}/{{ business.name }}">More information</a>
+            <div class="content">
+                <div class="text-content">
+                    <h1>{{ business.company.name }}</h1>
+                    <h3>{{ business.name }}</h3>
+                    <p>{{ business.description }}</p><br>
+                    <a href="/user.info/{{ business.company.name }}/{{ business.name }}"><button>More information</button></a>
+                </div>
             </div>
+            <hr><br>
         {% endfor %}
-    </div>
+    </main>
 
 </body>
 </html>

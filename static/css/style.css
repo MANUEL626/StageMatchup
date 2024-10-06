@@ -1,122 +1,435 @@
-/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Cascadia+Code:wght@700&family=Nirmala+UI:wght@700&family=OCR+A+Extended:wght@700&display=swap');
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cascadia Code', 'Nirmala UI', 'OCR A Extended', sans-serif;
 }
 
-.company-nav {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
+header {
+    background-color: rgb(255, 255, 255);
+    height: 100px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
 }
 
-.company-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 100px;
+    width: 100%;
+    padding-right: 40px;
+    padding-left: 40px;
 }
 
-.company-nav ul li {
-    display: inline-block;
-    margin-right: 10px;
-}
-
-.company-nav ul li:last-child {
-    margin-right: 0;
-}
-
-.company-nav ul li a {
+a {
+    color: black;
     text-decoration: none;
-    color: #fff;
 }
 
-.company-nav ul li a:hover {
-    text-decoration: underline;
-    color: #ccc;
+.img_icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
-h4 {
-    color: #333;
+.align {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
 }
 
-.post {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 20px;
+.logo{
+    font-weight: bold;
+    font-size: 2rem;
 }
 
-.post a {
-    text-decoration: none;
-    color: #333;
+
+.overlay{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: none;
+    z-index: 1200;
 }
 
-.post a:hover {
-    text-decoration: underline;
-    color: #555;
+.header_nav_list hr{
+    width: 80%;
 }
 
-/* Ajoutez ces styles à votre fichier CSS */
-
-.edit-link, .delete-link {
-    display: inline-block;
-    padding: 8px 16px;
-    text-decoration: none;
-    color: #fff;
-    background-color: #007bff;
-    border: 1px solid #007bff;
-    border-radius: 4px;
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+.overlay.open{
+    display: block;
 }
 
-.edit-link:hover, .delete-link:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+.button_icon {
+    width: 20px;
+    height: 20px;
+    margin-left: 8px; /* Ajuste l'espace entre l'icône et le prix */
 }
 
-/* Si vous voulez espacer un peu les liens */
-.post-links {
-    margin-top: 10px;
-}
 
-/**/
-h1 {
-    color: #333;
-    text-align: center;
-}
+
 
 .div-index {
     display: flex;
     justify-content: center;
-    margin-top: 50px;
+    align-items: center;
+    height: 80vh;
 }
 
 .div-section {
-    margin: 0 20px;
-    text-align: center;
-}
-
-.div-section a {
-    text-decoration: none;
+    margin: 20px;
 }
 
 .section {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
     padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
     display: inline-block;
+    transition: background-color 0.3s ease;
 }
 
 .section:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #0056b3;
 }
 
 .section p {
     margin: 0;
+}
+
+.h1 {
+    text-align: center;
     color: #333;
 }
+
+
+main {
+    padding-top: 100px;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+}
+
+
+
+
+.button-container {
+    margin-top: 16px; /* Ajuste l'espace entre les informations et le bouton */
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 50px; /* Bord arrondi de façon circulaire */
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Transition pour les changements de couleur */
+}
+
+button:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black; /* Ajoute une bordure noire au survol */
+}
+
+
+/* xorsee paragraph */
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+
+.text-content {
+    max-width: 60%;
+}
+
+.content h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.content p {
+    font-size: 1em;
+    line-height: 1.6;
+}
+
+.content a {
+    color: purple;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.content a:hover {
+    color: darkmagenta;
+}
+
+/* account*/
+
+.user-profile {
+    margin-bottom: 20px;
+}
+
+.log_btn {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
+}
+
+.log_btn:hover {
+    background-color: white;
+    color: black;
+    transform: scale(1.1);
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+}
+
+.popup.show {
+    display: block;
+}
+
+.popup p {
+    margin-bottom: 20px;
+}
+
+.popup form {
+    display: flex;
+    justify-content: space-between;
+}
+
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.popup-overlay.show {
+    display: block;
+}
+
+/* alert message */
+#flash-messages {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: auto;
+    max-width: 300px;
+}
+
+.flash {
+    position: relative;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    animation: fadein 0.5s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4CAF50; /* Default background color */
+}
+
+.flash.success {
+    background-color: #4CAF50;
+}
+
+.flash.error {
+    background-color: #F44336;
+}
+
+.flash.warning {
+    background-color: #FF9800;
+}
+
+.flash.info {
+    background-color: #2196F3;
+}
+
+.flash .close-icon {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeout {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.fade-out {
+    animation: fadeout 0.5s;
+    opacity: 0;
+}
+
+/* connection */
+
+.connection {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    align-items: center;
+}
+
+.connection .title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333333;
+}
+
+.connection .input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.connection .input-group input, textarea {
+    width: 100%;
+    padding: 10px;
+    padding-top: 20px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.connection .input-group label {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    padding: 10px 0;
+    color: #999999;
+    transition: 0.3s;
+    pointer-events: none;
+    font-size: 14px;
+}
+
+.connection .input-group input:focus + label, .input-group textarea:focus + label,
+.connection .input-group input:not(:placeholder-shown) + label {
+    top: -20px;
+    left: 10px;
+    font-size: 12px;
+    color: #333333;
+    background: #ffffff;
+    padding: 0 5px;
+}
+
+.connection .submit-btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+
+.connection .submit-btn:hover {
+    background-color: #ffffff;
+    color: #000000;
+    transform: scale(1.05);
+}
+
+.connection .login-link {
+    margin-top: 20px;
+}
+
+.connection .login-link a {
+    color: #333333;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.connection .login-link a:hover {
+    color: #000000;
+}
+
+/* Stylisation des balises select */
+.connection .input-group select {
+    width: 100%;
+    padding: 10px;
+    padding-top: 20px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    margin-bottom: 20px;
+    appearance: none;
+    background: url('data:image/svg+xml;base64,...') no-repeat right 10px center;
+    background-size: 12px;
+}
+
+.connection .input-group select:focus + label,
+.connection .input-group select:not(:placeholder-shown) + label {
+    top: -20px;
+    left: 10px;
+    font-size: 12px;
+    color: #333333;
+    background: #ffffff;
+    padding: 0 5px;
+}
+
