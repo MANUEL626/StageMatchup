@@ -233,18 +233,16 @@ def company_profile():
 
 @app.route('/company.logout', methods=['POST', 'GET'])
 def company_logout():
-    if 'company_id' not in session:
-        return redirect(url_for('company_login'))
     session.pop('company_id', None)
     return redirect(url_for('company_login'))
 
 
-@app.route('/company.delete',methods=['POST', 'GET'])
+@app.route('/company.delete', methods=['POST', 'GET'])
 def company_delete():
     if 'company_id' not in session:
         return redirect(url_for('company_login'))
     if 'company_id' in session:
-        company = User.query.get(session['company_id'])
+        company = Company.query.get(session['company_id'])
         if company:
             db.session.delete(company)
             db.session.commit()
